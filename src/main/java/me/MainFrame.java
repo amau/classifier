@@ -1,15 +1,6 @@
 
 package me;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
-import me.ui.ClassifierPanel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -19,8 +10,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import me.ui.ClassifierPanel;
+
+import org.apache.commons.io.FileUtils;
 
 public class MainFrame implements KeyListener
 {
@@ -39,7 +42,11 @@ public class MainFrame implements KeyListener
 	protected List<File> animals = new ArrayList<File>();
 
 	protected List<File> empty = new ArrayList<File>();
-
+	
+	protected String animalsFolder = "animals";
+	
+	protected String emptyFolder = "empty";
+	
 	protected int count = 0;
 
 
@@ -124,21 +131,27 @@ public class MainFrame implements KeyListener
 	private void end()
 	{
 		panel.end(panel.getGraphics());
-		System.out.println("");
-		System.out.println("Pictures with animals: ");
-		System.out.println("");
-		for (File f : this.animals)
+		
+		File animalsDirectory = new File(directory,animalsFolder);
+		File emptyDirectory = new File(directory,animalsFolder);
+		
+		if(!animalsDirectory.exists())
 		{
-			System.out.println(f.getName());
+			animalsDirectory.mkdir();
 		}
-		System.out.println("");
-		System.out.println("Pictures without animals: ");
-		System.out.println("");
-		for (File f : this.empty)
+		if(!emptyDirectory.exists())
 		{
-			System.out.println(f.getName());
+			emptyDirectory.mkdir();
 		}
-		resize();
+		try
+		{
+			moveFiles(animals,animalsDirectory);
+			moveFiles(empty,emptyDirectory);	
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 
@@ -147,6 +160,13 @@ public class MainFrame implements KeyListener
 		// We don't want to do anything on key typed.
 	}
 
+	public void moveFiles(List<File> files, File destDir) throws IOException
+	{
+		for(File file : files)
+		{
+			FileUtils.copyFileToDirectory(file, destDir);
+		}
+	}
 
 	public void keyPressed(KeyEvent e)
 	{
