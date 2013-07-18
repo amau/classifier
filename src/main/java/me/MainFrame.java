@@ -133,7 +133,7 @@ public class MainFrame implements KeyListener
 		panel.end(panel.getGraphics());
 		
 		File animalsDirectory = new File(directory,animalsFolder);
-		File emptyDirectory = new File(directory,animalsFolder);
+		File emptyDirectory = new File(directory,emptyFolder);
 		
 		if(!animalsDirectory.exists())
 		{
