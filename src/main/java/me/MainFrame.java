@@ -130,6 +130,7 @@ public class MainFrame implements KeyListener
 
 	private void end()
 	{
+		frame.removeKeyListener(this);
 		panel.end(panel.getGraphics());
 		
 		File animalsDirectory = new File(directory,animalsFolder);
