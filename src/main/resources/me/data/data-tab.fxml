@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import java.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Tab text="Fill Data" fx:id="liveTab" fx:controller="me.data.DataController" xmlns:fx="http://javafx.com/fxml">
+    <content>
+        <SplitPane orientation="vertical" fx:id="liveView">
+
+        </SplitPane>
+    </content>
+</Tab>

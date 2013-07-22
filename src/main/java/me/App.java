@@ -13,7 +13,7 @@ public class App extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		primaryStage.setTitle("FXML TableView Example");
+		primaryStage.setTitle("Classifier");
 		Pane myPane = (Pane) FXMLLoader.load(getClass().getResource(
 				"Application.fxml"));
 		Scene myScene = new Scene(myPane);
