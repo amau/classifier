@@ -10,12 +10,83 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 
 <Tab text="Fill Data" fx:id="liveTab" fx:controller="me.data.DataController" xmlns:fx="http://javafx.com/fxml">
-    <content>
-        <SplitPane orientation="vertical" fx:id="liveView">
-
-        </SplitPane>
-    </content>
+  <content>
+    <HBox fx:id="contentPane" prefHeight="600.0" prefWidth="1200.0">
+      <children>
+        <FlowPane fx:id="contentPane" prefHeight="600.0" prefWidth="400.0">
+          <children>
+			<ScrollPane  prefHeight="600.0"  prefWidth="200.0">
+              <content>          
+				<VBox fx:id="infoPane" prefWidth="190.0">
+				  <children>
+					<Label  text="File Name" prefWidth="150.0" />
+					<TextField fx:id="fileName" prefWidth="160.0" />
+					<Label  text="Scientific Name" prefWidth="150.0" />
+					<TextField fx:id="scientificName" prefWidth="160.0" />
+					<Label  text="Sex" prefWidth="150.0" />
+					<TextField fx:id="sex" prefWidth="160.0" />
+					<Label  text="Latitude" prefWidth="150.0" />
+					<TextField fx:id="latitude" prefWidth="160.0" />
+					<Label  text="Longitude" prefWidth="150.0" />
+					<TextField fx:id="longitude" prefWidth="160.0" />
+					<Label  text="Elevation In Meters" prefWidth="150.0" />
+					<TextField fx:id="elevationInMeters" prefWidth="160.0" />
+					<Label  text="Weather" prefWidth="150.0" />
+					<TextField fx:id="weather" prefWidth="160.0" />
+					<Label  text="Vegetation" prefWidth="150.0" />
+					<TextField fx:id="vegetation" prefWidth="160.0" />
+					<Label  text="County" prefWidth="150.0" />
+					<TextField fx:id="county" prefWidth="160.0" />
+					<Label  text="State" prefWidth="150.0" />
+					<TextField fx:id="state" prefWidth="160.0" />
+					<Label  text="Country" prefWidth="150.0" />
+					<TextField fx:id="country" prefWidth="160.0" />
+					<Label  text="Date" prefWidth="150.0" />
+					<TextField fx:id="date" prefWidth="160.0" />
+					<Label  text="Time Collected" prefWidth="150.0" />
+					<TextField fx:id="timeCollected" prefWidth="160.0" />
+					<Label  text="Collector" prefWidth="150.0" />
+					<TextField fx:id="collector" prefWidth="160.0" />
+					<Label  text="Collector Number" prefWidth="150.0" />
+					<TextField fx:id="collectorNumber" prefWidth="160.0" />
+					<Label  text="Catalog Number" prefWidth="150.0" />
+					<TextField fx:id="catalogNumber" prefWidth="160.0" />
+					<Label  text="Identified By" prefWidth="150.0" />
+					<TextField fx:id="identifiedBy" prefWidth="160.0" />
+					<Label  text="Film Or Digital Camera" prefWidth="150.0" />
+					<TextField fx:id="filmOrDigitalCamera" prefWidth="160.0" />
+					<Label  text="Project" prefWidth="150.0" />
+					<TextField fx:id="project" prefWidth="160.0" />
+					<Label  text="Project Manager" prefWidth="150.0" />
+					<TextField fx:id="projectManager" prefWidth="160.0" />
+					<Label  text="finantial Support" prefWidth="150.0" />
+					<TextField fx:id="finantialSupport" prefWidth="160.0" />
+					<Label  text="Laboratory Manager" prefWidth="150.0" />
+					<TextField fx:id="laboratoryManager" prefWidth="160.0" />
+					<Label  text="Digital Card Work" prefWidth="150.0" />
+					<TextField fx:id="digitalCardWork" prefWidth="160.0" />
+				  </children>
+				</VBox>
+			  </content>
+			</ScrollPane>
+			<ScrollPane  prefHeight="580.0"  prefWidth="200.0">
+              <content>
+			    <ListView fx:id="animalsList" prefHeight="580.0" prefWidth="190.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                    </FXCollections>
+                  </items>
+                </ListView>
+              </content>
+            </ScrollPane>
+		  </children>
+        </FlowPane>
+        <ImageView fx:id="imageContainer" fitHeight="600.0" fitWidth="800" pickOnBounds="true" preserveRatio="true"/>
+      </children>
+    </HBox>
+  </content>
 </Tab>

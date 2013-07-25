@@ -10,12 +10,43 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 
 <Tab text="Classify" fx:id="liveTab" fx:controller="me.classify.ClassifyController" xmlns:fx="http://javafx.com/fxml">
-    <content>
-        <SplitPane orientation="vertical" fx:id="liveView">
-
-        </SplitPane>
-    </content>
+  <content>
+    <HBox fx:id="contentPane" prefHeight="600.0" prefWidth="1200.0">
+      <children>
+        <FlowPane fx:id="contentPane" prefHeight="600.0" prefWidth="400.0">
+          <children>
+            <ScrollPane  prefHeight="580.0" prefWidth="200.0">
+              <content>          
+                <ListView fx:id="listView" prefHeight="580.0" prefWidth="190.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                    </FXCollections>
+                  </items>
+                </ListView>
+               </content>
+            </ScrollPane>   
+            <ScrollPane  prefHeight="580.0" prefWidth="200.0">
+              <content>
+                <ListView fx:id="animalsList" prefHeight="580.0" prefWidth="190.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                    </FXCollections>
+                  </items>
+                </ListView>
+              </content>
+            </ScrollPane>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="400.0" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+              <Button onAction="#addAnimal" text="Add" />
+              <Button onAction="#removeAnimal" text="Remove" />
+            </HBox>
+          </children>
+        </FlowPane>
+        <ImageView fx:id="imageContainer" fitHeight="600.0" fitWidth="800" pickOnBounds="true" preserveRatio="true"/>
+      </children>
+    </HBox>
+  </content>
 </Tab>
