@@ -31,9 +31,8 @@
     </MenuBar>
     <TabPane layoutY="24.0" tabClosingPolicy="UNAVAILABLE" >
 	    <tabs>
-			<!--<fx:include source="classify/classify-tab.fxml"/>
-			<fx:include source="data/data-tab.fxml"/>-->
-			<fx:include source="example/example-tab.fxml"/>
+			<fx:include source="classify/classify-tab.fxml"/>
+			<fx:include source="data/data-tab.fxml"/>
         </tabs>
 	</TabPane>
   </children>
