@@ -23,32 +23,79 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
 public class ExcelFacadeImpl implements ExcelFacade
-{
-	protected static ExcelFacade instance;
+{	
+	protected File file;
+	protected WritableSheet sheet;
+	protected WritableFont arial10font;
+	protected WritableCellFormat arial10format;
+	protected WritableWorkbook workbook;
+
+	protected Animal headers;
 	
-	public static ExcelFacade getInstance()
+	
+		
+	public ExcelFacadeImpl(File file)
 	{
-		if(instance == null)
-		{
-			instance = new ExcelFacadeImpl();
-		}
-		return instance;
+		this.file = file;
+		init();
 	}
 	
+	
+	private void init()
+	{
+		try
+		{
+			workbook = Workbook.createWorkbook(file);
+			sheet = workbook.createSheet("First Sheet", 0);
+			arial10font = new WritableFont(WritableFont.ARIAL, 10);
+			arial10format = new WritableCellFormat (arial10font); 
+			headers = new Animal();
+			headers.setFileName("File Name");
+			headers.setScientificName("Scientific Name");
+			headers.setSex("Sex");
+			headers.setLatitude("Latitude");
+			headers.setLongitude("Longitude");
+			headers.setElevationInMeters("Elevation In Meters");
+			headers.setWeather("Weather");
+			headers.setVegetation("Vegetation");
+			headers.setCounty("County");
+			headers.setState("State");
+			headers.setCountry("Country");
+			headers.setDate("Date");
+			headers.setTimeCollected("Time Collected");
+			headers.setCollector("Collector");
+			headers.setCollectorNumber("Collector Number");
+			headers.setCatalogNumber("Catalog Number");
+			headers.setIdentifiedBy("Identified By");
+			headers.setFilmOrDigitalCamera("Film Or Digital Camera");
+			headers.setProject("Project");
+			headers.setProjectManager("Project Manager");
+			headers.setFinantialSupport("Finantial Support");
+			headers.setLaboratoryManager("Laboratory Manager");
+			headers.setDigitalCardWork("Digital Card Work");
+			writeAnimal(headers,0);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch (WriteException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
 	public void writeAnimal(Animal animal, int row) throws IOException, WriteException
 	{
-		WritableWorkbook workbook = Workbook.createWorkbook(new File("output.xls"));
-		WritableSheet sheet = workbook.createSheet("First Sheet", 0);
-		
-		WritableFont arial10font = new WritableFont(WritableFont.ARIAL, 10);
-		WritableCellFormat arial10format = new WritableCellFormat (arial10font); 
-		// Create the label, specifying content and format 
 		sheet.addCell(new Label(0,row, animal.getFileName(), arial10format));
 		sheet.addCell(new Label(1,row, animal.getScientificName(), arial10format));
 		sheet.addCell(new Label(2,row, animal.getSex(), arial10format));
-		sheet.addCell(new Label(3,row, animal.getLatitude()+"", arial10format));
-		sheet.addCell(new Label(4,row, animal.getLongitude()+"", arial10format));
-		sheet.addCell(new Label(5,row, animal.getElevationInMeters()+"", arial10format));
+		sheet.addCell(new Label(3,row, animal.getLatitude(), arial10format));
+		sheet.addCell(new Label(4,row, animal.getLongitude(), arial10format));
+		sheet.addCell(new Label(5,row, animal.getElevationInMeters(), arial10format));
 		sheet.addCell(new Label(6,row, animal.getWeather(), arial10format));
 		sheet.addCell(new Label(7,row, animal.getVegetation(), arial10format));
 		sheet.addCell(new Label(8,row, animal.getCountry(), arial10format));
@@ -65,22 +112,39 @@ public class ExcelFacadeImpl implements ExcelFacade
 		sheet.addCell(new Label(19,row, animal.getFinantialSupport(), arial10format));
 		sheet.addCell(new Label(20,row, animal.getLaboratoryManager(), arial10format));
 		sheet.addCell(new Label(21,row, animal.getDigitalCardWork(), arial10format));
+	}
+	
+	public void close()
+	{
+		try
+		{
+			workbook.write();
+			workbook.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch (WriteException e)
+		{
+			e.printStackTrace();
+		} 
 		
-		workbook.write(); 
-		workbook.close();
 	}
 	
 	
 	public static void main(String args[]) throws IOException, WriteException
 	{
+		ExcelFacade excel = new ExcelFacadeImpl(new File("output.xls"));
+		
 		Animal animal = new Animal();
 		
 		animal.setFileName("ZLM1214.tif");
 		animal.setScientificName("Canis latrans");
 		animal.setSex("ND");
-		animal.setLatitude(17.92334);
-		animal.setLongitude(-97.05452);
-		animal.setElevationInMeters(776);
+		animal.setLatitude("17.92334");
+		animal.setLongitude("-97.05452");
+		animal.setElevationInMeters("776");
 		animal.setWeather("BSo(h')w");
 		animal.setVegetation("Selva Baja Caducifolia Secundaria");
 		animal.setCounty("Santa María Tecomavaca");
@@ -99,6 +163,7 @@ public class ExcelFacadeImpl implements ExcelFacade
 		animal.setLaboratoryManager("Francisco Botello");
 		animal.setDigitalCardWork("Zalluly Lona, Francisco Botello, Arturo Pérez");
 		
-		ExcelFacadeImpl.getInstance().writeAnimal(animal,1);
+		excel.writeAnimal(animal,1);
+		excel.close();
 	}
 }

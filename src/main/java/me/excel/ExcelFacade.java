@@ -18,4 +18,6 @@ public interface ExcelFacade
 
 	void writeAnimal(Animal animal, int i) throws IOException, WriteException;
 
+	void close();
+
 }
