@@ -94,10 +94,10 @@ public class Context
 		{
 			public boolean accept(File fileName)
 			{
-				return fileName.getName().matches(".*\\.jpe?g$")
-						|| fileName.getName().matches(".*\\.gif$")
-						|| fileName.getName().matches(".*\\.tiff$")
-						|| fileName.getName().matches(".*\\.png$");
+				return fileName.getName().toLowerCase().matches(".*\\.jpe?g$")
+						|| fileName.getName().toLowerCase().matches(".*\\.gif$")
+						|| fileName.getName().toLowerCase().matches(".*\\.tiff$")
+						|| fileName.getName().toLowerCase().matches(".*\\.png$");
 			}
 		});
 
